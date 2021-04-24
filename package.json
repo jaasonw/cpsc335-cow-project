@@ -1,25 +1,20 @@
 {
-  "name": "cs335-cow-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "cow-project",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jaasonw/cs335-cow-project.git"
-  },
-  "author": "jason wong",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jaasonw/cs335-cow-project/issues"
-  },
-  "homepage": "https://github.com/jaasonw/cs335-cow-project#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "next": "10.1.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "typescript": "^4.2.4"
   }
 }

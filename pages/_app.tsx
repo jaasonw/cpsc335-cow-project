@@ -1,12 +1,11 @@
-// import logo from './logo.svg';
-// import './App.css';
+import '../styles/index.css';
 import { useEffect, useState } from 'react';
 
 function App() {
 
   const [text, setText] = useState("");
 
-  useEffect(() =>  {
+  useEffect(() => {
     fetch("/api/delicate").then(response => {
       response.text().then((data) => {
         setText(data)
