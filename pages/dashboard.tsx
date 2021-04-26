@@ -1,7 +1,10 @@
-import firebase from 'firebase';
-import '../components/firebase_config';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import '../components/firebase_config';
+
 import { Button, Container } from 'semantic-ui-react'
 
 function Dashboard() {

@@ -1,9 +1,13 @@
-import firebase from 'firebase';
-import '../components/firebase_config';
 import React from 'react';
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import '../components/firebase_config';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import axios from 'axios';
+
 import { Container } from 'semantic-ui-react';
+
 
 const uiConfig = {
   signInFlow: 'popup',

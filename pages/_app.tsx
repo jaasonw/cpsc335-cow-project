@@ -1,12 +1,16 @@
-import '../styles/index.css';
-import 'semantic-ui-css/semantic.min.css'
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
-import SignInScreen from './login';
-import firebase from 'firebase';
-import Dashboard from './dashboard';
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import '../components/firebase_config';
+
+import '../styles/index.css';
+import 'semantic-ui-css/semantic.min.css'
 import { Container, Divider } from 'semantic-ui-react';
+
+import SignInScreen from './login';
+import Dashboard from './dashboard';
 
 
 function App() {
