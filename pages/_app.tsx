@@ -4,7 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import SignInScreen from './login';
 import firebase from 'firebase';
 import Dashboard from './dashboard';
-import './firebase_config';
+import '../components/firebase_config';
+import { Container } from 'semantic-ui-react';
 
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          {text}
+          <Container>
+            {text}
+          </Container>
         </div>
         {(!user) ? <SignInScreen/> : <Dashboard/>}
       </header>

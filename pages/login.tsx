@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import './firebase_config';
+import '../components/firebase_config';
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import axios from 'axios';

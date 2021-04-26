@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import { Client } from 'pg';
 import { NextApiRequest, NextApiResponse } from 'next'
-import { adminInit } from './firebase_admin/firebase_admin_config'
+import { adminInit } from '../../components/firebase_admin/firebase_admin_config'
 import dotenv from 'dotenv';
 dotenv.config();
 
