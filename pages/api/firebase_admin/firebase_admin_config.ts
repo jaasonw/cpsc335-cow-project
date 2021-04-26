@@ -1,7 +1,8 @@
 import * as admin from 'firebase-admin';
+import dotenv from 'dotenv';
+dotenv.config();
 
-var serviceAccount = require("../../cpsc335-cow-project-firebase-adminsdk-ls0oa-2d04968a76.json");
-
+let serviceAccount = JSON.parse(process.env.GCLOUD_KEY || "")
 
 export function adminInit() {
   if (!admin.apps.length) {
