@@ -14,10 +14,12 @@ function App() {
   useEffect(() => {
     fetch("/api/delicate").then(response => {
       response.text().then((data) => {
-        setText(data)
+        let lyrics = JSON.parse(data);
+        console.log(lyrics[Math.floor(Math.random() * lyrics.length)].lyrics)
+        setText(lyrics[Math.floor(Math.random() * lyrics.length)].lyrics)
       })
     })
-  });
+  }, []);
 
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
