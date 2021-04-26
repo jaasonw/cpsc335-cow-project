@@ -35,3 +35,5 @@ yarn-error.log*
 .vercel
 
 *.d.ts
+
+*firebase-adminsdk-ls0oa-2d04968a76.json

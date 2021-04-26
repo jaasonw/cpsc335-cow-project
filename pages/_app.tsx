@@ -1,28 +1,43 @@
-import '../styles/index.css';
 import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import '../components/firebase_config';
+
+import '../styles/index.css';
+import 'semantic-ui-css/semantic.min.css'
+import { Container, Divider } from 'semantic-ui-react';
+
+import SignInScreen from './login';
+import Dashboard from './dashboard';
+
 
 function App() {
-
   const [text, setText] = useState("");
-
   useEffect(() => {
     fetch("/api/delicate").then(response => {
       response.text().then((data) => {
-        setText(data)
+        let lyrics = JSON.parse(data);
+        setText(lyrics[Math.floor(Math.random() * lyrics.length)].lyrics)
       })
     })
-  });
+  }, []);
 
-  console.log(text)
+  const auth = firebase.auth();
+  const [user] = useAuthState(auth);
 
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        {(!user) ? <SignInScreen/> : <Dashboard/>}
+      </header>
+      <Divider></Divider>
+      <Container text>
         <div>
           {text}
         </div>
-      </header>
+      </Container>
     </div>
   );
 }
