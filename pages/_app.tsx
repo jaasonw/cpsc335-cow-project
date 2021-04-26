@@ -16,10 +16,9 @@ import Dashboard from './dashboard';
 function App() {
   const [text, setText] = useState("");
   useEffect(() => {
-    fetch("/api/delicate").then(response => {
+    fetch("/api/lyrics").then(response => {
       response.text().then((data) => {
-        let lyrics = JSON.parse(data);
-        setText(lyrics[Math.floor(Math.random() * lyrics.length)].lyrics)
+        setText(data)
       })
     })
   }, []);
