@@ -3,6 +3,7 @@ import '../components/firebase_config';
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import axios from 'axios';
+import { Container } from 'semantic-ui-react';
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -38,11 +39,10 @@ firebase.auth().onAuthStateChanged(async (user) => {
 class SignInScreen extends React.Component {
   render() {
     return (
-      <div>
-        <h1>My App</h1>
-        <p>Please sign-in:</p>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
-      </div>
+      <Container textAlign='center'>
+          <h1>Helloooooooo this is a wip cow project 🐄🤠</h1>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
+      </Container>
     );
   }
 }
