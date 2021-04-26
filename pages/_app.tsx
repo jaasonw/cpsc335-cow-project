@@ -6,7 +6,7 @@ import SignInScreen from './login';
 import firebase from 'firebase';
 import Dashboard from './dashboard';
 import '../components/firebase_config';
-import { Container, Divider, Header } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 
 
 function App() {
@@ -15,7 +15,6 @@ function App() {
     fetch("/api/delicate").then(response => {
       response.text().then((data) => {
         let lyrics = JSON.parse(data);
-        console.log(lyrics[Math.floor(Math.random() * lyrics.length)].lyrics)
         setText(lyrics[Math.floor(Math.random() * lyrics.length)].lyrics)
       })
     })
