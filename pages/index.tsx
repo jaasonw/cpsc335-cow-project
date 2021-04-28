@@ -9,7 +9,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Container, Divider } from 'semantic-ui-react';
 
 import SignInScreen from './login';
-import Dashboard from './dashboard';
+import { useRouter } from 'next/router';
 
 export default function App() {
   const [text, setText] = useState("");
@@ -24,10 +24,15 @@ export default function App() {
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
 
+  let router = useRouter();
+  if (user) {
+    router.push("/dashboard")
+  }
   return (
     <div className="App">
       <header className="App-header">
-        {(!user) ? <SignInScreen /> : <Dashboard />}
+        {/* {(!user) ? <SignInScreen /> : <redirect to='/dashboard'/>} */}
+        <SignInScreen />
       </header>
       <Divider></Divider>
       <Container text>
