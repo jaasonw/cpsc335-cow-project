@@ -14,9 +14,7 @@ const uiConfig = {
   // signInSuccessUrl: '/dashboard',
   callbacks: {
     // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => {
-      return false;
-    },
+    signInSuccessWithAuthResult: () => false,
   },
   signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -44,8 +42,8 @@ class SignInScreen extends React.Component {
   render() {
     return (
       <Container textAlign='center'>
-          <h1>Helloooooooo this is a wip cow project 🐄🤠</h1>
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
+        <h1>Helloooooooo this is a wip cow project 🐄🤠</h1>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
       </Container>
     );
   }
