@@ -1,44 +1,45 @@
-import { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import '../components/firebase_config';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "../components/firebase_config";
 
-import 'semantic-ui-css/semantic.min.css'
-import { Container, Divider } from 'semantic-ui-react';
+import "semantic-ui-css/semantic.min.css";
+import { Container, Divider } from "semantic-ui-react";
 
-import SignInScreen from './login';
-import { useRouter } from 'next/router';
+import SignInScreen from "./login";
+import { useRouter } from "next/router";
 
 export default function App() {
   const [text, setText] = useState("");
   useEffect(() => {
-    fetch("/api/lyrics").then(response => {
+    fetch("/api/lyrics").then((response) => {
       response.text().then((data) => {
-        setText(data)
-      })
-    })
+        setText(data);
+      });
+    });
   }, []);
 
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
 
   let router = useRouter();
-  if (user) {
-    router.push("/dashboard")
-  }
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push("/dashboard");
+  //   }
+  // });
+
   return (
     <div className="App">
       <header className="App-header">
-        {/* {(!user) ? <SignInScreen /> : <redirect to='/dashboard'/>} */}
-        <SignInScreen />
+        {!user ? <SignInScreen /> : router.push("/dashboard")}
+        {/* <SignInScreen /> */}
       </header>
       <Divider></Divider>
       <Container text>
-        <div>
-          {text}
-        </div>
+        <div>{text}</div>
       </Container>
     </div>
   );
