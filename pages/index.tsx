@@ -25,17 +25,11 @@ export default function App() {
   const [user] = useAuthState(auth);
 
   let router = useRouter();
-  // useEffect(() => {
-  //   if (user) {
-  //     router.push("/dashboard");
-  //   }
-  // });
 
   return (
     <div className="App">
       <header className="App-header">
         {!user ? <SignInScreen /> : router.push("/dashboard")}
-        {/* <SignInScreen /> */}
       </header>
       <Divider></Divider>
       <Container text>
