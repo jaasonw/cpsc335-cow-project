@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import '../components/firebase_config';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 import { Button, Container } from 'semantic-ui-react'
 
@@ -12,7 +12,7 @@ function Dashboard() {
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
   
-  let router = Router;
+  let router = useRouter();
   if (!user) {
     router.push('../')
   }
