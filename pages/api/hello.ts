@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dotenv from "dotenv";
 import { Client } from "pg";
+import { createClient } from "../../components/createClient";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const client = new Client({
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  let client = createClient();
   client.connect();
   try {
     let query = await client.query(
