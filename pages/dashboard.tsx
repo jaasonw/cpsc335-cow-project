@@ -56,14 +56,16 @@ function Dashboard() {
           return (
             <Grid.Column>
               <Card>
-                <Image src="https://i.pinimg.com/originals/28/6e/af/286eaf4bfad4c26c0fe0ba91dbb050c7.jpg"></Image>
-                <Divider></Divider>
-                <Card.Header>ID: {herd.id}</Card.Header>
-                <Card.Description>
-                  Last Fed: {herd.feed_time}
-                  <br></br>
-                  Waste: {herd.waste}
-                </Card.Description>
+                <Card.Content>
+                  <Image src="https://i.pinimg.com/originals/28/6e/af/286eaf4bfad4c26c0fe0ba91dbb050c7.jpg"></Image>
+                  <Divider></Divider>
+                  <Card.Header>ID: {herd.id}</Card.Header>
+                  <Card.Description>
+                    Last Fed: {herd.feed_time}
+                    <br></br>
+                    Waste: {herd.waste}
+                  </Card.Description>
+                </Card.Content>
               </Card>
             </Grid.Column>
           );
