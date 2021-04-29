@@ -1,16 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import dotenv from "dotenv";
-import { Client } from "pg";
 import { createClient } from "../../components/createClient";
-
-dotenv.config();
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   let client = createClient();

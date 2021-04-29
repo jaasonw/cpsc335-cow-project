@@ -1,4 +1,6 @@
 import { Client } from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
 export function createClient() {
   return new Client({
