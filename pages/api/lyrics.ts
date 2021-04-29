@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } else return res.status(404).end();
   } catch (error) {
     console.log(error);
+  } finally {
     client.end();
   }
-  client.end();
 };
