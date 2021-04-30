@@ -8,7 +8,6 @@ import "semantic-ui-css/semantic.min.css";
 export default function Herd() {
   const router = useRouter();
   const { id } = router.query;
-  // const { id } = router.query;
   const [cows, setCows] = useState([]);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export default function Herd() {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              {cows[0].map((field: any) => (
+              {(cows[0] as Array<any>).map((field: any) => (
                 <Table.HeaderCell key={field.name}>
                   {field.name}
                 </Table.HeaderCell>
@@ -42,9 +41,9 @@ export default function Herd() {
             {Object.entries(cows[1]).map((row) => {
               return (
                 <Table.Row key={row[0]}>
-                  {Object.entries(row[1]).map((entry) => {
+                  {Object.entries(row[1] as Object).map((entry) => {
                     console.log(row[1]);
-                    return <Table.Cell key={entry}>{entry[1]}</Table.Cell>;
+                    return <Table.Cell key={entry[0]}>{entry[1]}</Table.Cell>;
                   })}
                 </Table.Row>
               );
