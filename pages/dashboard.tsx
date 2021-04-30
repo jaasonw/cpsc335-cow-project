@@ -7,29 +7,21 @@ import "../components/firebase_config";
 import { useRouter } from "next/router";
 import "semantic-ui-css/semantic.min.css";
 
-import {
-  Button,
-  Card,
-  Container,
-  Image,
-  Grid,
-  Divider,
-} from "semantic-ui-react";
+import { Button, Container, Grid } from "semantic-ui-react";
 import axios from "axios";
+import CowCard from "../components/cowCard";
 
 function Dashboard() {
-  const auth = firebase.auth();
-  const [user] = useAuthState(auth);
+  const [user] = useAuthState(firebase.auth());
   const [herds, setHerds] = useState<any[]>([]);
 
   let router = useRouter();
 
   useEffect(() => {
     if (user) {
-      console.log(auth.currentUser?.uid);
       axios
         .post("/api/getHerds", {
-          uid: auth.currentUser?.uid,
+          uid: user.uid,
         })
         .then((response) => {
           console.log(response.data);
@@ -41,7 +33,7 @@ function Dashboard() {
   return (
     <Container>
       <div>
-        <h1>🤠 Logged in as: {firebase.auth().currentUser?.displayName}</h1>
+        <h1>🤠 Logged in as: {user?.getIdToken()}</h1>
         <Button
           onClick={() => {
             firebase.auth().signOut();
@@ -55,18 +47,11 @@ function Dashboard() {
         {herds.map((herd) => {
           return (
             <Grid.Column>
-              <Card>
-                <Card.Content>
-                  <Image src="https://i.pinimg.com/originals/28/6e/af/286eaf4bfad4c26c0fe0ba91dbb050c7.jpg"></Image>
-                  <Divider></Divider>
-                  <Card.Header>ID: {herd.id}</Card.Header>
-                  <Card.Description>
-                    Last Fed: {herd.feed_time}
-                    <br></br>
-                    Waste: {herd.waste}
-                  </Card.Description>
-                </Card.Content>
-              </Card>
+              <CowCard
+                id={herd.id}
+                feed_time={herd.feed_time}
+                waste={herd.waste}
+              ></CowCard>
             </Grid.Column>
           );
         })}
