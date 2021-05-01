@@ -42,7 +42,6 @@ export default function Herd() {
               return (
                 <Table.Row key={row[0]}>
                   {Object.entries(row[1] as Object).map((entry) => {
-                    console.log(row[1]);
                     return <Table.Cell key={entry[0]}>{entry[1]}</Table.Cell>;
                   })}
                 </Table.Row>
