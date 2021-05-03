@@ -7,7 +7,7 @@ import "../components/firebase_config";
 import { useRouter } from "next/router";
 import "semantic-ui-css/semantic.min.css";
 
-import { Button, Container, Grid } from "semantic-ui-react";
+import { Button, Container, Grid, Header, Menu } from "semantic-ui-react";
 import axios from "axios";
 import HerdList from "../components/HerdList";
 
@@ -15,7 +15,7 @@ function Dashboard() {
   const [user] = useAuthState(firebase.auth());
   const [herds, setHerds] = useState<any[]>([]);
 
-  let router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     if (user) {
@@ -32,18 +32,23 @@ function Dashboard() {
 
   return (
     <Container>
-      <div>
-        <h1>🤠 Logged in as: {user?.displayName}</h1>
-        <Button
-          onClick={() => {
-            firebase.auth().signOut();
-            router.push("../");
-          }}
-        >
-          Sign Out
-        </Button>
-      </div>
-      <HerdList herds={herds}></HerdList>
+      <Container style={{ marginTop: 10 }}>
+        <Header as="h3" textAlign="right">
+          🤠 Logged in as: {user?.displayName}
+          <br></br>
+          <a
+            onClick={() => {
+              firebase.auth().signOut();
+              router.push("../");
+            }}
+          >
+            Sign Out
+          </a>
+        </Header>
+      </Container>
+      <Container style={{ marginTop: 40 }}>
+        <HerdList herds={herds}></HerdList>
+      </Container>
     </Container>
   );
 }

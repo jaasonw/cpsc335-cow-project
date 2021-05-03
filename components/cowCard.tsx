@@ -1,18 +1,26 @@
+import { useRouter } from "next/router";
 import { Card, Divider, Image } from "semantic-ui-react";
 
 interface CardProps {
   id: number;
   feed_time: string;
   waste: number;
+  onClick?: Function;
 }
 
 export default function CowCard(props: CardProps) {
+  const router = useRouter();
+  const navigateToCows = () => {
+    router.push("/herd/" + props.id);
+  };
   return (
     <Card>
       <Card.Content>
-        <Image src="https://i.pinimg.com/originals/28/6e/af/286eaf4bfad4c26c0fe0ba91dbb050c7.jpg"></Image>
+        <Image src="/cow.jpg"></Image>
         <Divider></Divider>
-        <Card.Header>{props.id}</Card.Header>
+        <Card.Header>
+          <a onClick={navigateToCows}>{props.id}</a>
+        </Card.Header>
         <Card.Description>
           Last Fed: {props.feed_time}
           <br></br>

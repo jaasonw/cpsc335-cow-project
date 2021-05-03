@@ -1,5 +1,6 @@
+import { useRouter } from "next/router";
 import { Grid } from "semantic-ui-react";
-import CowCard from "./cowCard";
+import CowCard from "./CowCard";
 
 interface HerdProps {
   herds: Array<any>;
@@ -15,6 +16,10 @@ export default function HerdList(props: HerdProps) {
               id={herd.id}
               feed_time={herd.feed_time}
               waste={herd.waste}
+              onClick={() => {
+                const router = useRouter();
+                router.push("../herd/" + herd.id);
+              }}
             ></CowCard>
           </Grid.Column>
         );

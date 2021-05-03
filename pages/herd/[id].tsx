@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Container, List, Loader, Table } from "semantic-ui-react";
-import { QueryResult } from "pg";
+import { Button, Container, Loader } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import CowTable from "../../components/CowTable";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "../../components/firebase_config";
 
 export default function Herd() {
+  const [user] = useAuthState(firebase.auth());
   const router = useRouter();
   const { id } = router.query;
   const [cows, setCows] = useState([]);
 
-  useEffect(() => {
+  const updateCows = () => {
     if (id) {
       axios
         .post("/api/getCowsInHerd", {
@@ -21,34 +26,30 @@ export default function Herd() {
           setCows(response.data);
         });
     }
-  }, [id]);
+  };
+
+  const addCow = () => {
+    axios
+      .post("/api/addCow", {
+        herd_id: id,
+        owner_id: user?.uid,
+      })
+      .then((response) => {
+        console.log(response.data);
+        // setCows(response.data);
+        updateCows();
+      });
+  };
+
+  useEffect(updateCows, [id]);
+
   return (
-    <Container>
+    <Container style={{ marginTop: 40 }}>
+      <Button onClick={addCow}>Add Cow</Button>
       {!cows[1] ? (
         <Loader inverted></Loader>
       ) : (
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              {(cows[0] as Array<any>).map((field: any) => (
-                <Table.HeaderCell key={field.name}>
-                  {field.name}
-                </Table.HeaderCell>
-              ))}
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {Object.entries(cows[1]).map((row) => {
-              return (
-                <Table.Row key={row[0]}>
-                  {Object.entries(row[1] as Object).map((entry) => {
-                    return <Table.Cell key={entry[0]}>{entry[1]}</Table.Cell>;
-                  })}
-                </Table.Row>
-              );
-            })}
-          </Table.Body>
-        </Table>
+        <CowTable cows={cows}></CowTable>
       )}
     </Container>
   );
