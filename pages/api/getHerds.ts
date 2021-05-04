@@ -1,22 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import dotenv from "dotenv";
-import { createClient } from "../../components/createClient";
-dotenv.config();
+import { dbQuery } from "../../components/dbQuery";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const client = createClient();
-    client.connect();
     try {
-      let query = await client.query("select * from herds where owner = $1;", [
+      let q = await dbQuery("select * from herds where owner = $1;", [
         req.body["uid"],
       ]);
-
-      res.status(200).json(query.rows);
-    } catch (error) {
-      console.log(error.detail);
-    } finally {
-      client.end();
+      res.status(200).json(q.rows);
+    } catch (e) {
+      console.log(e)
+      res.status(400).end();
     }
   } else {
     res.status(400).end();

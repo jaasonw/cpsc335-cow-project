@@ -1,12 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createClient } from "../../components/createClient";
+import { dbQuery } from "../../components/dbQuery";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const client = createClient();
-  client.connect();
   try {
-    let query = await client.query("select * from taylor_swift;");
-    client.end();
+    let query = await dbQuery("select * from taylor_swift;");
     if (query.rows.length > 0) {
       res.setHeader("Content-Type", "text/plain");
       return res
@@ -15,7 +12,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } else return res.status(404).end();
   } catch (error) {
     console.log(error);
-  } finally {
-    client.end();
   }
 };
