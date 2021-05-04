@@ -8,12 +8,16 @@ import CowTable from "../../components/CowTable";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "../../components/firebase_config";
+import MilkTable from "../../components/MilkTable";
 
 export default function Herd() {
   const [user] = useAuthState(firebase.auth());
   const router = useRouter();
   const { id } = router.query;
   const [cows, setCows] = useState([]);
+  const [milk, setMilk] = useState([]);
+  const [loadingMilk, setLoadingMilk] = useState(true);
+  const [loadingCows, setLoadingCows] = useState(true);
 
   const updateCows = () => {
     if (id) {
@@ -24,6 +28,31 @@ export default function Herd() {
         .then((response) => {
           console.log(response.data);
           setCows(response.data);
+          setLoadingCows(false);
+        });
+    }
+    if (id) {
+      axios
+        .post("/api/getCowsInHerd2", {
+          herd_id: id,
+        })
+        .then((response) => {
+          console.log(response.data);
+          // setCows(response.data);
+        });
+    }
+  };
+
+  const updateMilk = () => {
+    if (id) {
+      axios
+        .post("/api/getMilkData", {
+          herd_id: id,
+        })
+        .then((response) => {
+          console.log(response.data);
+          setMilk(response.data);
+          setLoadingMilk(true);
         });
     }
   };
@@ -35,21 +64,27 @@ export default function Herd() {
         owner_id: user?.uid,
       })
       .then((response) => {
-        console.log(response.data);
-        // setCows(response.data);
         updateCows();
       });
   };
 
-  useEffect(updateCows, [id]);
+  useEffect(() => {
+    updateMilk();
+    updateCows();
+    setLoadingMilk(true);
+    setLoadingCows(true);
+  }, [id]);
 
   return (
     <Container style={{ marginTop: 40 }}>
       <Button onClick={addCow}>Add Cow</Button>
-      {!cows[1] ? (
+      {!loadingMilk && !loadingCows ? (
         <Loader inverted></Loader>
       ) : (
-        <CowTable cows={cows}></CowTable>
+        <Container>
+          <CowTable cows={cows}></CowTable>
+          <MilkTable milk={milk}></MilkTable>
+        </Container>
       )}
     </Container>
   );
