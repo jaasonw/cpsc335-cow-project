@@ -11,10 +11,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           "set date_removed = $1, source = $2, location = $3, date_acquired = $4 where id = $5",
         [cow.date_removed, cow.source, cow.location, cow.date_acquired, cow.id]
       );
+      let query = await dbQuery(
+        "select id, date_acquired, date_removed, source, location from cows where id = $1;",
+        [req.body["id"]]
+      );
+      res.status(200).json(query.rows);
     } catch (error) {
       console.log(error);
     }
-    res.status(200).json({ Response: "Success" });
   } else {
     res.status(400).end();
   }

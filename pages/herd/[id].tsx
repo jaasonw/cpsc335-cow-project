@@ -26,19 +26,8 @@ export default function Herd() {
           herd_id: id,
         })
         .then((response) => {
-          console.log(response.data);
           setCows(response.data);
           setLoadingCows(false);
-        });
-    }
-    if (id) {
-      axios
-        .post("/api/getCowsInHerd2", {
-          herd_id: id,
-        })
-        .then((response) => {
-          console.log(response.data);
-          // setCows(response.data);
         });
     }
   };
@@ -50,7 +39,6 @@ export default function Herd() {
           herd_id: id,
         })
         .then((response) => {
-          console.log(response.data);
           setMilk(response.data);
           setLoadingMilk(true);
         });

@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         "select id, date_acquired, date_removed, source, location from cows where herd_id = $1 order by id ;",
         [req.body["herd_id"]]
       );
-      res.status(200).json([query.fields, query.rows]);
+      res.status(200).json(query.rows);
     } catch (error) {
       console.log(error.detail);
     }
