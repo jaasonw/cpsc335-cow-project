@@ -59,7 +59,7 @@ function MilkTableRow(props: MilkRowProps) {
                 defaultValue={entry[1]}
                 options={cowIds}
                 onChange={(e) => {
-                  milk.cow_id = e.target.innerText;
+                  milk.cow_id = parseInt((e.target as HTMLElement).innerText);
                   setMilk(milk);
                   updateMilk();
                   // console.log(e.target.innerText);
