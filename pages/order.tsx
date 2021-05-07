@@ -33,9 +33,6 @@ function FeedOrder() {
       setSuppliers(_suppliers);
     });
   }, []);
-  useEffect(() => {
-    console.log(suppliers[supplier]);
-  });
 
   return (
     <Container style={{ marginTop: 40 }}>
@@ -48,7 +45,6 @@ function FeedOrder() {
             label="Quantity"
             placeholder="0"
             onChange={(e, { value }) => {
-              console.log(value);
               transaction.quantity = parseInt(value);
               setQuantity(transaction.quantity);
             }}
@@ -96,6 +92,7 @@ function FeedOrder() {
             };
             axios.post("api/purchaseFeed", t).then(() => {
               alert("Purchased");
+              window.location.reload();
             });
           }}
         >

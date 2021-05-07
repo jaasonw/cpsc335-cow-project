@@ -30,7 +30,6 @@ function FeedTableRow(props: FeedRowProps) {
       id: props.id,
       herd_id: herdId,
     });
-    console.log(herdId);
   }, [herdId]);
   return (
     <Table.Row key={props.row["id"]}>
@@ -43,7 +42,6 @@ function FeedTableRow(props: FeedRowProps) {
                 defaultValue={herdId}
                 options={herdList}
                 onChange={(e, data) => {
-                  console.log(data.value);
                   setHerdId(data.value);
                 }}
               ></Dropdown>
@@ -64,7 +62,6 @@ export default function FeedTable() {
 
   useEffect(() => {
     axios.post("api/getFeeds", { id: user?.uid }).then((e) => {
-      console.log(e.data);
       setFeed(e.data);
     });
   }, [user]);

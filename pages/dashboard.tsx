@@ -7,7 +7,7 @@ import "../components/firebase_config";
 import { useRouter } from "next/router";
 import "semantic-ui-css/semantic.min.css";
 
-import { Button, Container, Grid, Header, Menu } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import axios from "axios";
 import HerdList from "../components/HerdList";
 
