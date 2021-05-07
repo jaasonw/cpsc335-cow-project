@@ -9,6 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import "firebase/auth";
 import "../components/firebase_config";
 import axios from "axios";
+import FeedTable from "../components/FeedTable";
 
 const shipping = [
   { key: "slow", text: "Economy (5-7 Days)", value: 10 },
@@ -26,9 +27,8 @@ function FeedOrder() {
 
   useEffect(() => {
     getSupplierList().then((e: Array<Supplier>) => {
-      const _suppliers: Array<any> = [];
-      e.map((e, i) => {
-        _suppliers.push({ key: e.id, text: e.name, value: i });
+      const _suppliers = e.map((e, i) => {
+        return { key: e.id, text: e.name, value: i };
       });
       setSuppliers(_suppliers);
     });
@@ -102,6 +102,7 @@ function FeedOrder() {
           Submit
         </Form.Button>
       </Form>
+      <FeedTable></FeedTable>
     </Container>
   );
 }
