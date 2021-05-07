@@ -9,6 +9,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "../../components/firebase_config";
 import MilkTable from "../../components/MilkTable";
+import { Cow } from "../../components/definitions/Cow";
 
 export default function Herd() {
   const [user] = useAuthState(firebase.auth());
@@ -55,6 +56,15 @@ export default function Herd() {
         updateCows();
       });
   };
+  const addMilk = () => {
+    axios
+      .post("/api/addMilk", {
+        cow_id: (cows[0] as Cow).id,
+      })
+      .then((response) => {
+        updateMilk();
+      });
+  };
 
   useEffect(() => {
     updateMilk();
@@ -65,13 +75,14 @@ export default function Herd() {
 
   return (
     <Container style={{ marginTop: 40 }}>
-      <Button onClick={addCow}>Add Cow</Button>
       {!loadingMilk && !loadingCows ? (
         <Loader inverted></Loader>
       ) : (
         <Container>
+          <Button onClick={addCow}>Add Cow</Button>
           <CowTable cows={cows}></CowTable>
-          <MilkTable milk={milk}></MilkTable>
+          <Button onClick={addMilk}>Add Milk</Button>
+          <MilkTable milk={milk} cows={cows}></MilkTable>
         </Container>
       )}
     </Container>

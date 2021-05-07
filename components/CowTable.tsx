@@ -1,13 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Container,
-  Form,
-  Header,
-  Input,
-  Table,
-} from "semantic-ui-react";
+import { Button, Container, Header, Input, Table } from "semantic-ui-react";
 import { Cow } from "./definitions/Cow";
 
 interface CowTableProps {
