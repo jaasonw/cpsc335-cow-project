@@ -7,7 +7,7 @@ import "../components/firebase_config";
 import { useRouter } from "next/router";
 import "semantic-ui-css/semantic.min.css";
 
-import { Container, Header } from "semantic-ui-react";
+import { Button, Container, Header } from "semantic-ui-react";
 import axios from "axios";
 import HerdList from "../components/HerdList";
 
@@ -47,21 +47,20 @@ function Dashboard() {
         </Header>
       </Container>
       <Container style={{ marginTop: 40 }}>
-        <a
+        <Button
           onClick={() => {
             router.push("/order");
           }}
         >
           Order Feed
-        </a>
-        <br></br>
-        <a
+        </Button>
+        <Button
           onClick={() => {
             router.push("/lineage");
           }}
         >
           Edit Lineage
-        </a>
+        </Button>
         <br></br>
         <HerdList herds={herds}></HerdList>
       </Container>
