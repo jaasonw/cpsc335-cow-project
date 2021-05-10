@@ -102,9 +102,6 @@ function MilkTableRow(props: MilkRowProps) {
         }
         return <Table.Cell key={entry[0]}>{element}</Table.Cell>;
       })}
-      <Table.Cell>
-        <Button>✅</Button>
-      </Table.Cell>
     </Table.Row>
   );
 }
@@ -121,7 +118,6 @@ export default function MilkTable(props: MilkTableProps) {
                   <Table.HeaderCell key={field[0]}>{field[0]}</Table.HeaderCell>
                 );
               })}
-              <Table.HeaderCell>Edit</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
