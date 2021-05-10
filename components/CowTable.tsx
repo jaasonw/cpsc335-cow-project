@@ -13,12 +13,18 @@ interface CowRowProps {
 }
 function CowTableRow(props: CowRowProps) {
   const [cow, setCow] = useState(props.row);
+  const [dateAdded, setDateAdded] = useState(cow.date_acquired);
+  const [dateRemoved, setDateRemoved] = useState(cow.date_removed);
+  const [source, setSource] = useState(cow.source);
+  const [location, setLocation] = useState(cow.location);
+
   const [updating, setUpdating] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const updateCow = () => {
     setUpdating(true);
     axios.post("/api/updateCow", cow).then((e) => {
+      console.log(e.data[0])
       setCow(e.data[0]);
       setUpdating(false);
     });
@@ -31,45 +37,47 @@ function CowTableRow(props: CowRowProps) {
 
   useEffect(() => {
     // console.log(cow.source);
-    if (cow.date_removed) setDisabled(true);
+    if (cow?.date_removed) setDisabled(true);
     else setDisabled(false);
   }, [cow]);
   return (
     <Table.Row disabled={disabled} key={props.row["id"]}>
       {Object.entries(props.row).map((entry) => {
         let element = <span>{entry[1]}</span>;
-        switch (entry[0]) {
-          case "date_removed":
-            element = <span>{cow.date_removed}</span>;
-            break;
-          case "source":
-            element = (
-              <Input
-                loading={updating}
-                disabled={disabled}
-                defaultValue={cow.source}
-                onChange={(e, d) => {
-                  cow.source = e.target.value;
-                  setCow(cow);
-                }}
-              ></Input>
-            );
-            break;
-          case "location":
-            element = (
-              <Input
-                loading={updating}
-                disabled={disabled}
-                defaultValue={cow.location}
-                onChange={(e, d) => {
-                  cow.source = e.target.value;
-                  setCow(cow);
-                }}
-              ></Input>
-            );
-            break;
-          default:
-            break;
+        if (cow) {
+          switch (entry[0]) {
+            case "date_removed":
+              element = <span>{cow?.date_removed}</span>;
+              break;
+            case "source":
+              element = (
+                <Input
+                  loading={updating}
+                  disabled={disabled}
+                  defaultValue={cow.source}
+                  onChange={(e, d) => {
+                    cow.source = e.target.value;
+                    setCow(cow);
+                  }}
+                ></Input>
+              );
+              break;
+            case "location":
+              element = (
+                <Input
+                  loading={updating}
+                  disabled={disabled}
+                  defaultValue={cow.location}
+                  onChange={(e, d) => {
+                    cow.location = e.target.value;
+                    setCow(cow);
+                  }}
+                ></Input>
+              );
+              break;
+            default:
+              break;
+          }
         }
         return <Table.Cell key={entry[0]}>{element}</Table.Cell>;
       })}

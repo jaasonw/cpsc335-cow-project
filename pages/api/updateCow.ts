@@ -12,10 +12,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         [cow.date_removed, cow.source, cow.location, cow.date_acquired, cow.id]
       );
       let query = await dbQuery(
-        "select milk_id, id as cow_id, quantity, date, comments from cows " +
-          "INNER JOIN milk_data md on cows.id = md.cow_id " +
-          " where herd_id = $1 order by milk_id",
-        [req.body["herd_id"]]
+        "select id, date_acquired, date_removed, source, location from cows where id = $1;",
+        [cow["id"]]
       );
 
       res.status(200).json(query.rows);
