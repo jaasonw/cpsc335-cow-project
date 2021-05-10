@@ -57,10 +57,10 @@ function Dashboard() {
         <br></br>
         <a
           onClick={() => {
-            router.push("/Edit Lineage");
+            router.push("/lineage");
           }}
         >
-          Order Feed
+          Edit Lineage
         </a>
         <br></br>
         <HerdList herds={herds}></HerdList>
