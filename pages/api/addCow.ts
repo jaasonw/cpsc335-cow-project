@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const cow = req.body as Cow;
     try {
       await dbQuery(
-        "insert into cows(herd_id, owner_id, date_acquired) values($1, $2)",
+        "insert into cows(herd_id, owner_id, date_acquired) values($1, $2, $3)",
         [cow.herd_id, cow.owner_id, date]
       );
     } catch (error) {
