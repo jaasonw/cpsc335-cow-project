@@ -47,6 +47,22 @@ function Dashboard() {
         </Header>
       </Container>
       <Container style={{ marginTop: 40 }}>
+        <a
+          onClick={() => {
+            router.push("/order");
+          }}
+        >
+          Order Feed
+        </a>
+        <br></br>
+        <a
+          onClick={() => {
+            router.push("/Edit Lineage");
+          }}
+        >
+          Order Feed
+        </a>
+        <br></br>
         <HerdList herds={herds}></HerdList>
       </Container>
     </Container>

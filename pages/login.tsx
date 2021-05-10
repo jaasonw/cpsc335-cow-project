@@ -38,7 +38,7 @@ class SignInScreen extends React.Component {
   render() {
     return (
       <Container textAlign="center">
-        <h1>Helloooooooo this is a wip cow project 🐄🤠</h1>
+        <h1>Welcome to On the Hoof Dairy 🐄🤠</h1>
         <StyledFirebaseAuth
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}

@@ -13,13 +13,13 @@ import { useRouter } from "next/router";
 
 export default function App() {
   const [text, setText] = useState("");
-  useEffect(() => {
-    fetch("/api/lyrics").then((response) => {
-      response.text().then((data) => {
-        setText(data);
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/lyrics").then((response) => {
+  //     response.text().then((data) => {
+  //       setText(data);
+  //     });
+  //   });
+  // }, []);
 
   const auth = firebase.auth();
   const [user] = useAuthState(auth);
